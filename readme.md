@@ -16,7 +16,9 @@
 
 **HackMIT 2025** is a project by the *GapLess* team aiming to create a living, verifiable skills profile that turns your real work (docs, links, repos) into a structured, evidence-backed portfolio, maps you to non-obvious roles, and generates tailored “apply” packets in one click.
 
-We built both a **frontend** and **backend** to [describe what user sees / what backend handles].  
+We built both a **frontend** and **backend** to make this possible:  
+- **Frontend:** A clean, interactive web interface where users can upload artifacts, view Skill Tiles, explore role matches, and generate application packets.  
+- **Backend:** A robust service layer that ingests documents, processes them through Claude for skill extraction, links skills to proof snippets, matches users against a role library, and assembles dynamic recruiter packets.  
 
 ---
 
