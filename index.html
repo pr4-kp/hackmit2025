@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Prooffolio — Resume (MVP)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root { --bg:#0f0f11; --panel:#16171a; --muted:#9aa0a6; --text:#e8eaed; --brand:#8ab4f8; }
+    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{max-width:820px;margin:32px auto;padding:0 16px}
+    h1{font-size:22px;margin:0 0 16px}
+    .panel{background:var(--panel);border:1px solid #27282b;border-radius:12px;padding:16px;margin:12px 0}
+    label{display:block;margin:10px 0 6px;color:var(--muted)}
+    input[type=file],textarea{width:100%;background:#0e0f11;color:var(--text);border:1px solid #2a2b2e;border-radius:8px;padding:10px}
+    textarea{min-height:70px}
+    .btn{background:var(--brand);color:#0b1020;border:0;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    pre{white-space:pre-wrap;background:#0b0c0e;border:1px solid #222;border-radius:10px;padding:12px;overflow:auto}
+    .grid{display:grid;gap:12px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{border:1px solid #26272a;border-radius:12px;padding:12px;background:#111214}
+    .muted{color:var(--muted)}
+    .badge{display:inline-block;border:1px solid #2b2c2f;border-radius:999px;padding:2px 8px;margin:2px 4px 0 0;font-size:12px;color:#cbd5e1}
+    .small{font-size:12px}
+    a.link{color:var(--brand);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Prooffolio — Upload your resume</h1>
+
+    <div class="panel">
+      <form id="uform">
+        <label>Resume (PDF)</label>
+        <input type="file" id="resume" name="resume" accept="application/pdf" required />
+
+        <label style="margin-top:12px">About / Interests (optional)</label>
+        <textarea id="about" name="about" placeholder="Short about... e.g., Python + dashboards; interested in sustainability and AI policy."></textarea>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+          <button class="btn" id="submitBtn">Process</button>
+          <span id="status" class="muted small"></span>
+        </div>
+      </form>
+    </div>
+
+    <div id="results" class="grid" style="margin-top:16px;display:none">
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Artifacts</h2>
+        <div id="artifacts" class="grid grid-3"></div>
+      </div>
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Skills (with proof)</h2>
+        <div id="skills" class="grid grid-3"></div>
+      </div>
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Projects</h2>
+        <div id="projects" class="grid grid-3"></div>
+      </div>
+      <div class="panel">
+        <details>
+          <summary>Raw JSON</summary>
+          <pre id="raw"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Change if your backend runs on a different port
+    const API = 'http://localhost:3000';
+
+    const form = document.getElementById('uform');
+    const btn  = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('status');
+    const results = document.getElementById('results');
+
+    // Show "resume received" as soon as a file is chosen
+    document.getElementById('resume').addEventListener('change', (e) => {
+      const f = e.target.files && e.target.files[0];
+      statusEl.textContent = f ? `Resume selected: ${f.name}` : '';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      statusEl.textContent = 'Uploading resume…';
+      results.style.display = 'none';
+
+      try {
+        const fd = new FormData();
+
+        // Resume-only: send ONLY resume + about
+        const resume = document.getElementById('resume').files[0];
+        if (!resume) throw new Error('Please choose a resume PDF.');
+        fd.append('resume', resume);
+        fd.append('about', document.getElementById('about').value || '');
+
+        const r = await fetch(API + '/process', { method:'POST', body: fd });
+        const text = await r.text();
+        let data;
+        try { data = JSON.parse(text); } catch { throw new Error(text || 'Invalid JSON'); }
+
+        renderArtifacts(data.artifacts || []);
+        renderSkills(data.skills || []);
+        renderProjects(data.projects || []);
+        document.getElementById('raw').textContent = JSON.stringify(data, null, 2);
+        results.style.display = '';
+
+        const savedLink = API + '/outputs/latest.json';
+        const title = (data.artifacts && data.artifacts[0] && (data.artifacts[0].title || data.artifacts[0].id)) || 'resume.pdf';
+        statusEl.innerHTML = `Processed resume: <b>${escapeHtml(title)}</b> — saved to <a class="link" href="${savedLink}" target="_blank">outputs/latest.json</a>`;
+      } catch (err) {
+        statusEl.textContent = 'Error: ' + (err.message || err);
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    function renderArtifacts(items){
+      const box = document.getElementById('artifacts'); box.innerHTML = '';
+      for (const a of items){
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <div><b>${escapeHtml(a.title || a.id)}</b></div>
+          <div class="small muted">${a.type}</div>
+          <div class="small" style="margin-top:6px">${escapeHtml((a.text_excerpt || '').slice(0,180))}…</div>
+        `;
+        box.appendChild(div);
+      }
+    }
+
+    function renderSkills(items){
+      const box = document.getElementById('skills'); box.innerHTML = '';
+      for (const s of items){
+        const div = document.createElement('div');
+        const ev = (s.evidence && s.evidence[0]) || null;
+        div.className = 'card';
+        div.innerHTML = `
+          <div><b>${escapeHtml(s.name)}</b> <span class="badge">${escapeHtml(s.level || '')}</span></div>
+          ${ev ? `<div class="small muted" style="margin-top:6px">Proof (${escapeHtml(ev.artifact_id)}): “${escapeHtml((ev.snippet||'').slice(0,160))}”</div>` : ''}
+        `;
+        box.appendChild(div);
+      }
+    }
+
+    function renderProjects(items){
+      const box = document.getElementById('projects'); box.innerHTML = '';
+      for (const p of items){
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <div><b>${escapeHtml(p.title || 'Project')}</b></div>
+          <div class="small" style="margin-top:6px">${escapeHtml(p.summary || '')}</div>
+        `;
+        box.appendChild(div);
+      }
+    }
+
+    function escapeHtml(s){
+      return (s||'').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+  </script>
+</body>
+</html>
