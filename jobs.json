@@ -1,0 +1,29 @@
+[
+  {
+    "id": "job_se_1",
+    "title": "Solutions Engineer (AI)",
+    "company": "Acme Cloud",
+    "location": "Remote",
+    "url": "https://example.com/jobs/se-ai-1",
+    "description": "Own presales demos, build POCs with APIs and Python, help customers succeed.",
+    "keywords": ["apis", "presales demos", "problem framing", "python", "sql", "oauth", "cloud basics", "llm prompting"]
+  },
+  {
+    "id": "job_da_1",
+    "title": "Data Analyst",
+    "company": "Northstar",
+    "location": "NYC",
+    "url": "https://example.com/jobs/da-1",
+    "description": "Analyze funnels, build dashboards, communicate insights.",
+    "keywords": ["sql", "dashboards", "data cleaning", "stakeholder comms", "python", "a/b testing", "excel"]
+  },
+  {
+    "id": "job_tw_1",
+    "title": "Technical Writer (LLM)",
+    "company": "DocWorks",
+    "location": "Remote",
+    "url": "https://example.com/jobs/tw-1",
+    "description": "Write clear API docs, examples, and tutorials for LLM features.",
+    "keywords": ["clear writing", "api docs", "examples", "markdown", "git", "llm basics"]
+  }
+]
