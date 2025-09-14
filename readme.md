@@ -21,12 +21,14 @@ We built both a **frontend** and **backend** to [describe what user sees / what 
 ---
 
 ## Features
-
-- Feature 1 — e.g. User authentication / login  
-- Feature 2 — e.g. Real-time data updates  
-- Feature 3 — e.g. Interactive UI with X / Y  
-- Feature 4 — e.g. Database with persistence  
-- … *(add what else you’ve done / plan to do)*
+- **Ingest real work**  
+  Upload resumes, LinkedIn PDFs, GitHub repos, writing samples, lab reports, or awards.
+- **Evidence-backed skill extraction**  
+  Uses Claude to convert artifacts into *Skill Tiles* with name, level, last-seen date, and proof snippets tied directly to the source.
+- **Role matching & discovery**  
+  Maps skills to a curated library of 30–50 roles, returning top matches with “why” explanations and gap analysis — including *non-obvious roles* through adjacent skill discovery.
+- **Instant role-specific applications**  
+  Links to the job application page.
 
 ---
 
