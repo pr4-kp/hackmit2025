@@ -6,8 +6,7 @@
 - [Features](#features)  
 - [Tech Stack](#tech-stack)  
 - [Setup & Installation](#setup--installation)  
-- [Usage](#usage)  
-- [License](#license)  
+- [Usage](#usage)
 
 ---
 
@@ -75,7 +74,3 @@ We built both a **frontend** and **backend** to make this possible:
 Click on the url to access the website
 Upload your resume/paper or any other things that says about you
 Get your customized job recommendation
-
-## License
-
-[Specify license here, e.g. MIT License]
