@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Job Matcher</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Portfolio & Job Matcher</h1>
+            <p>Upload your resume and discover your perfect career match</p>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section" id="uploadSection">
+            <div class="upload-card">
+                <div class="upload-tabs">
+                    <button class="tab-btn active" data-tab="pdf">Upload your files</button>
+                    <!--<button class="tab-btn" data-tab="url">Portfolio URL</button>-->
+                </div>
+                
+                <div class="tab-content active" id="pdf-tab">
+                    <div class="upload-area" id="uploadArea">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                        <p>Drop your PDF resume here or <span class="upload-link">browse files</span></p>
+                        <input type="file" id="fileInput" accept=".pdf" hidden>
+                        
+                    </div>
+                    <input type="url" id="portfolioUrl" placeholder="Enter your portfolio URL (LinkedIn, GitHub, etc.)" class="url-input">
+                </div>
+                
+                <!--<div class="tab-content" id="url-tab">-->
+                    <!--<input type="url" id="portfolioUrl" placeholder="Enter your portfolio URL (LinkedIn, GitHub, etc.)" class="url-input">-->
+                <!--</div>-->
+                
+                <button class="analyze-btn" id="analyzeBtn">
+                    <span class="btn-text">Analyze Profile</span>
+                    <div class="spinner" id="spinner">
+                        <div class="spinner-ring"></div>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <!-- Skills Grid -->
+            <div class="skills-section">
+                <h2>Your Skills</h2>
+                <div class="skills-grid" id="skillsGrid">
+                    <!-- Skills will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Job Recommendations -->
+            <div class="roles-section">
+                <h2>Recommended Roles</h2>
+                <div class="roles-list" id="rolesList">
+                    <!-- Roles will be populated by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Popover for skill proofs -->
+    <div class="popover" id="skillPopover">
+        <div class="popover-content">
+            <button class="popover-close" id="popoverClose">&times;</button>
+            <h3 id="popoverTitle"></h3>
+            <p id="popoverText"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
