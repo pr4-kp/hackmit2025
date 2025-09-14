@@ -1,5 +1,4 @@
 # HackMIT 2025!
-# HackMIT 2025
 
 ## Table of Contents
 
