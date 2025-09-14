@@ -1,0 +1,116 @@
+{
+  "session_id": "profile-with-preferences",
+  "artifacts": [
+    {
+      "id": "a1",
+      "type": "pdf",
+      "title": "Resume_June.pdf",
+      "source_url": null,
+      "text_excerpt": "\n\n \nKristina \nSakayeva \nMIT Rising \nSophomore \n \nKristina Sakayeva \nsakris@mit.edu \nᅳ \nEducation \n \nWheeling High School \nSeptember 2020 - May 2024,  Wheeling, Illinois \n4.0/4.0 GPA \nPrincipal's award, Computer Science award, Law award, Math award, and \nhighest honors upon graduating. \nMassachusetts Institute of Technology \nAugust 2024 - expected May 2028,  Cambridge, Massachusetts \n6-4 Major- Artificial Intelligence and Decision Making  \nᅳ \nCurrent and Relevant Former \nCoursework \n \nMassachusetts Institute of Technology \n4.8/5.0 GPA \nFirst-year fall semester- \n● 6.100A Introduction to Computer Science Programming in \nPython (Pass) \n● 6.100B Introduction to Computational Thinking and Data \nScience (Pass) \n● 18.02 Multivariable Calculus (Pass) \n● 8.01 Physics 1 (Pass) \n● 3.986 Introduction to Archaeology (Pass) \nNote: MIT’s first year fall semester grading is based on pass/no record \nFirst-year spring semester- \n● 6.1010 Fundamentals of Programming (B) \n● 6.1200 Math for Computer Science (A) \n● 5.111 Introduction to Chemistry (A) \n● CMS.301 Game Design Methods (A) \nWheeling High School \nSenior year- \n● AP Computer Science Principles (scored 5 on AP test) \n● AP Statistics (scored 5 on AP test) \n● Advanced Computer Science \nJunior year- \n● AP Computer Science A (scored 5 on AP test) \n● AP Calculus BC (scored 5 on AP test) \nSophomore Year- \n● Dual-credit with Eastern Illinois University Law \n\nᅳ \nAwards and Honors \n \n● Illinois State Bar Association Mock Trial  award for Outstanding \nAttorney, 2024 \n○ Awarded for my performance as a cross-examining \nattorney in Mock Trial state competition \n● AP Scholar with Distinction, 2024 & 2023 \n● National Technical Honor Society membership under Computer \nScience, 2023 \n● National Honor Society membership, 2022 \nᅳ \nExperience \n \nFutureTech / AI in Science/ UROP \nFebruary  2025 - Now,  Cambridge, Massachusetts \nAssist in analyzing and synthesizing the impact of artificial intelligence on \nscientific research. Support supervisor-directed tasks involving literature \nreview, data collection, and project organization. \nQuincy Park Association/Pool attendant \nMay 2025 - Now,  Prospect Heights, Illinois \nSupervised pool by maintaining proper chemical levels, upholding safety \nrules and standards, and monitoring pool attendees’ safety.  \n \nPool Watch INC. / Pool watcher/Manager(2023-2024) \nMay  2022 - September 2024,  Prospect Heights, Illinois \nSupervised pool by maintaining proper chemical levels, upholding safety \nrules and standards, and monitoring pool attendees’ safety. Also \nmanaged other pool watchers by training and coordinating schedules. \n \nᅳ \nLeadership and \nExtracurriculars \n \nDanceTroupe, Dancer \nFebruary  2025 - Now,  Cambridge, Massachusetts \nTrain in hip hop choreography under the guidance of team \nchoreographers. Contribute to group rehearsals and perform in live stage \nshowcases, emphasizing precision, rhythm, and collaboration. \nMock Trial, Cross-examining attorney (2020-2024), Captain \n(2023-2024) \nOctober 2020 - April 2024,  Wheeling, Illinois \nActed as a cross-examining attorney in cases created by the Illinois State \nBar Association, competing in real courtrooms. Also mentored and \nguided fel"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python Programming",
+      "level": "intermediate",
+      "evidence": [
+        {
+          "artifact_id": "a1",
+          "snippet": "6.100A Introduction to Computer Science Programming in Python (Pass)"
+        }
+      ]
+    },
+    {
+      "name": "Data Science",
+      "level": "intermediate",
+      "evidence": [
+        {
+          "artifact_id": "a1",
+          "snippet": "6.100B Introduction to Computational Thinking and Data Science (Pass)"
+        }
+      ]
+    },
+    {
+      "name": "Mock Trial",
+      "level": "advanced",
+      "evidence": [
+        {
+          "artifact_id": "a1",
+          "snippet": "Acted as a cross-examining attorney in cases created by the Illinois State Bar Association, competing in real courtrooms"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "FutureTech / AI in Science UROP",
+      "summary": "Research project analyzing AI's impact on scientific research",
+      "evidence": [
+        {
+          "artifact_id": "a1",
+          "snippet": "Assist in analyzing and synthesizing the impact of artificial intelligence on scientific research"
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    "python",
+    "data science",
+    "AI",
+    "machine learning",
+    "research",
+    "computer science",
+    "programming",
+    "mock trial",
+    "leadership"
+  ],
+  "profile": {
+    "about": "MIT sophomore studying Artificial Intelligence and Decision Making, with strong academic achievements and diverse extracurricular experiences.",
+    "interests": [
+      "computer science",
+      "artificial intelligence",
+      "law",
+      "game design",
+      "dance"
+    ],
+    "preferences": {
+      "summary": "Seeking opportunities in AI, technology, and research-oriented roles",
+      "goals": [
+        "AI research",
+        "technology innovation"
+      ],
+      "interests": [
+        "artificial intelligence",
+        "computer science",
+        "scientific research"
+      ],
+      "industries": [
+        "technology",
+        "research",
+        "academic"
+      ],
+      "role_types": [
+        "research assistant",
+        "technical intern"
+      ],
+      "locations": [
+        "Cambridge, Massachusetts",
+        "Boston area"
+      ],
+      "work_modes": [
+        "onsite",
+        "remote",
+        "hybrid"
+      ],
+      "company_size": [
+        "academic",
+        "research",
+        "startup"
+      ]
+    }
+  },
+  "counts": {
+    "resume": 1,
+    "papers": 0
+  }
+}

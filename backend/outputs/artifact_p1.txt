@@ -1,0 +1,49 @@
+
+
+Measuring Meter: Modeling Poetic Rhythm as Coupled
+Oscillators and Sequence Models
+Avery Chen — avery.chen@alum.example.com
+Abstract
+Poetic meter is both formal constraint and embodied rhythm. We present a crossndisciplinary method that (1)
+infers stress patterns with a sequence model, (2) maps those patterns to a simple physical system of coupled
+oscillators, and (3) derives an interpretable “meter energy” that quantifies tension and release. On two
+annotated corpora (Shakespeare sonnets; a mixed modern set), our BiLSTMnCRF achieves 92% F1 for stress
+labeling; the oscillatory mapping correlates with expert scansion difficulty (ρ ≈ 0.61). We show applications to
+meter classification, pedagogical visualization, and constraintnaware generation.
+1. Introduction
+Readers feel meter as expectation—beats you can march to—and deviation—surprises that make lines sing.
+Literary scholars annotate stress with scansion marks; physicists describe periodic motion with oscillators. This
+paper connects the two: we first infer a line’s stress pattern with a standard sequence model, then interpret the
+pattern through a physical analogy that reveals where tension accumulates and dissipates. The goal is not to
+reduce poetry to physics, but to borrow a language of explainable structure that students and machines can
+both use.
+2. Related Work
+Prosody modeling spans rulenbased scansion, HMM/CRF tagging, and neural sequence models. Meanwhile,
+physics metaphors for art (e.g., harmonics in music) offer conceptual tools for pedagogy. Our contribution is to
+pair a competitive tagger with an explicit, lownparameter physical model that yields an interpretable score.
+3. Data & Preprocessing
+We compile two corpora: (i) Sonnets: 154 Shakespeare sonnets (∼2k lines) with canonical iambic annotations;
+(ii) Modern: 1.2k lines from 20th/21stncentury poets with crowdnsourced scansion crossnchecked by two
+annotators (κ=0.78). Tokens are syllabified (heuristics + CMUdict), lowercased, and enriched with POS and
+lexical stress priors.
+4. Method — 4.1 Stress Tagger
+We train a BiLSTMnCRF to predict syllablenlevel stress (y_t ∈ {0,1}) given features (syllable, POS, word
+shape, lexicon prior, position in foot). The model slightly outperforms an HMM baseline and matches a
+transformer miniature on this scale while remaining fast and lightweight.
+4. Method — 4.2 Oscillator Mapping
+
+We model each foot as a damped harmonic oscillator with natural frequency tied to the expected metrical
+pattern (e.g., iamb: unstress→stress). Let n_t be predicted stress; define displacement d_t = n_t − y*_t, where
+y*_t is the ideal stress (0/1) for the target meter. Define pernline meter energy: E = Σ_t k d_t^2 + c(d_t −
+d_{t−1})^2 with spring constant k and coupling term c encouraging smooth transitions. Intuitively, E rises with
+substitutions (e.g., trochaic inversion), catalexis, or syncopation, and falls when the line settles into pattern.
+4. Method — 4.3 Interpretability Layer
+We align spikes in E with tokens to explain where and why tension appears (“spondee at black night”, “feminine
+ending”). A simple rule set labels common phenomena for teaching.
+5. Experiments
+Stress Labeling: BiLSTMnCRF reaches 92.1 F1 (Sonnets) and 88.3 F1 (Modern), beating HMM by +6–9 F1.
+Meter Classification (iambic vs trochaic vs free): logistic regression on summary features of E hits 91.5%
+accuracy. Pedagogy Study (pilot): 24 students used a prototype energy overlay in a scansion exercise; quiz
+scores improved by +14% vs. control, and confidence selfnreports increased.
+6. Applications
+Teaching: Visualize meter energy at

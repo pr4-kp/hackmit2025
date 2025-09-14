@@ -1,86 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio & Job Matcher</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <title>GapLess</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Type: clean sans + elegant script accent -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Blue Flow Aesthetic ===== */
+    :root{
+      /* Palette (from your board) */
+      --ocean:#2563eb;   /* Ocean Blue */
+      --sky:#60a5fa;     /* Sky Blue  */
+      --powder:#bfdbfe;  /* Powder    */
+      --ice:#eff6ff;     /* Ice       */
+      --slate:#475569;   /* Slate     */
+      --cloud:#f3f4f6;   /* Cloud     */
+
+      /* Theming tokens mapped to your original variables */
+      --bg: linear-gradient(180deg, var(--ice) 0%, var(--powder) 60%, var(--cloud) 100%);
+      --panel: rgba(255,255,255,.70);
+      --panel-border: rgba(148,163,184,.22);
+      --muted:#667085;
+      --text:#0f172a;            /* slate-900 */
+      --brand:var(--ocean);
+      --brand-2:var(--sky);
+
+      --radius-lg:18px;
+      --radius-md:14px;
+      --shadow-soft:0 10px 30px rgba(2, 8, 23, .06), 0 2px 8px rgba(2, 8, 23, .05);
+      --shadow-hover:0 16px 36px rgba(2, 8, 23, .10), 0 4px 12px rgba(2, 8, 23, .08);
+      --ring:0 0 0 3px rgba(96,165,250,.35);
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg) fixed;
+      font:15px/1.6 "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{max-width:980px;margin:40px auto;padding:0 18px}
+
+    /* Headings */
+    h1{
+      margin:0 0 18px;
+      font-family:"Kaushan Script", cursive;
+      font-weight:400;
+      font-size:44px;
+      line-height:1.2;
+      letter-spacing:.3px;
+      text-align:center;
+      background:linear-gradient(90deg,var(--ocean), var(--sky));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    h2{
+      font-size:18px;
+      margin:0 0 8px;
+      color:#0b2447;
+      letter-spacing:.2px;
+    }
+    h3{
+      font-size:20px;
+      margin:0 0 8px;
+      color:#60a5fa;
+    }
+
+    /* Panels & Cards (soft glass) */
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:var(--radius-lg);
+      padding:20px;
+      margin:14px 0;
+      box-shadow:var(--shadow-soft);
+      backdrop-filter:saturate(1.2) blur(8px);
+    }
+    .card{
+      background:rgba(255,255,255,.65);
+      border:1px solid var(--panel-border);
+      border-radius:var(--radius-md);
+      padding:14px;
+      box-shadow:var(--shadow-soft);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+
+    /* Labels & text */
+    label{display:block;margin:10px 0 6px;color:var(--slate);font-weight:600;font-size:13px}
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+
+    /* Form fields */
+    input[type=file],input[type=text],textarea{
+      width:100%; color:var(--text);
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(99,102,241,.16);
+      border-radius:12px;
+      padding:11px 12px;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+    }
+    input[type=file]::file-selector-button{
+      margin-right:10px; padding:8px 12px; border:0; border-radius:10px;
+      background:linear-gradient(135deg,var(--ocean),var(--sky));
+      color:#fff; font-weight:600; cursor:pointer;
+    }
+    input[type=text]::placeholder, textarea::placeholder{color:#94a3b8}
+    textarea{min-height:96px}
+    input:focus, textarea:focus{ box-shadow:var(--ring); border-color:rgba(37,99,235,.45); background:#fff }
+
+    /* Buttons */
+    .btn{
+      background:linear-gradient(135deg,var(--ocean),var(--sky));
+      color:#fff; border:0; padding:11px 16px;
+      border-radius:12px; font-weight:700; cursor:pointer;
+      box-shadow:0 8px 20px rgba(37,99,235,.24);
+      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      text-decoration:none; /* so anchors look like buttons */
+      display:inline-block;
+    }
+    .btn:hover{ transform:translateY(-1px); filter:saturate(1.05); }
+    .btn:active{ transform:translateY(0); }
+    .btn:disabled{opacity:.6;cursor:not-allowed;box-shadow:none}
+
+    /* Chips / Pills / Badges */
+    .filechips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip,.badge,.pill{
+      display:inline-block;
+      border-radius:999px;
+      font-size:12px;
+      padding:4px 10px;
+      border:1px solid rgba(99,102,241,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(191,219,254,.45));
+      color:#0f1f34;
+    }
+    .badge{color:#0f2542}
+    .pill{font-weight:600;background:linear-gradient(180deg, rgba(191,219,254,.6), rgba(224,242,254,.55)); white-space:nowrap;}
+
+    /* Links */
+    a.link{color:var(--brand);text-decoration:none;font-weight:600}
+    a.link:hover{text-decoration:underline}
+
+    /* Layout */
+    .grid{display:grid;gap:14px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:860px){ .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:560px){ .grid-3{grid-template-columns:1fr} }
+
+    /* Job header alignment + spacing tweaks */
+    .job-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .scoreWrap{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex:1 1 100%;
+      justify-content:center;              /* centered percentages */
+      margin-top:6px;
+    }
+
+    /* Details summary style */
+    details summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:700;
+      color:#0b2447;
+    }
+    details summary::-webkit-details-marker{display:none}
+    details[open] summary{ color:var(--brand); }
+
+    /* Subtle top “flow” glow */
+    body::before{
+      content:"";
+      position:fixed; inset:auto -20% 60% -20%;
+      height:320px; z-index:-1;
+      background:radial-gradient(60% 60% at 50% 40%, rgba(96,165,250,.35), transparent 60%),
+                 radial-gradient(45% 45% at 70% 30%, rgba(37,99,235,.22), transparent 60%);
+      filter:blur(30px);
+      opacity:.8;
+      pointer-events:none;
+    }
+
+    /* NEW: multi-line clamp for summaries */
+    .clamp-3{
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    /* NEW: action row layout on job cards */
+    .job-actions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>Portfolio & Job Matcher</h1>
-            <p>Upload your resume and discover your perfect career match</p>
-        </header>
-
-        <!-- Upload Section -->
-        <section class="upload-section" id="uploadSection">
-            <div class="upload-card">
-                <div class="upload-tabs">
-                    <button class="tab-btn active" data-tab="pdf">Upload your files</button>
-                    <!--<button class="tab-btn" data-tab="url">Portfolio URL</button>-->
-                </div>
-                
-                <div class="tab-content active" id="pdf-tab">
-                    <div class="upload-area" id="uploadArea">
-                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14,2 14,8 20,8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10,9 9,9 8,9"/>
-                        </svg>
-                        <p>Drop your PDF resume here or <span class="upload-link">browse files</span></p>
-                        <input type="file" id="fileInput" accept=".pdf" hidden>
-                        
-                    </div>
-                    <input type="url" id="portfolioUrl" placeholder="Enter your portfolio URL (LinkedIn, GitHub, etc.)" class="url-input">
-                </div>
-                
-                <!--<div class="tab-content" id="url-tab">-->
-                    <!--<input type="url" id="portfolioUrl" placeholder="Enter your portfolio URL (LinkedIn, GitHub, etc.)" class="url-input">-->
-                <!--</div>-->
-                
-                <button class="analyze-btn" id="analyzeBtn">
-                    <span class="btn-text">Analyze Profile</span>
-                    <div class="spinner" id="spinner">
-                        <div class="spinner-ring"></div>
-                    </div>
-                </button>
-            </div>
-        </section>
-
-        <!-- Results Section -->
-        <section class="results-section" id="resultsSection" style="display: none;">
-            <!-- Skills Grid -->
-            <div class="skills-section">
-                <h2>Your Skills</h2>
-                <div class="skills-grid" id="skillsGrid">
-                    <!-- Skills will be populated by JS -->
-                </div>
-            </div>
-
-            <!-- Job Recommendations -->
-            <div class="roles-section">
-                <h2>Recommended Roles</h2>
-                <div class="roles-list" id="rolesList">
-                    <!-- Roles will be populated by JS -->
-                </div>
-            </div>
-        </section>
+  <div class="wrap">
+    <div style="text-align: center;">
+      <img src="logo.gif" alt="logo" style="width:300px;height:100px;">
     </div>
+    <h3>Upload a resume or papers</h3>
 
-    <!-- Popover for skill proofs -->
-    <div class="popover" id="skillPopover">
-        <div class="popover-content">
-            <button class="popover-close" id="popoverClose">&times;</button>
-            <h3 id="popoverTitle"></h3>
-            <p id="popoverText"></p>
+    <div class="panel">
+      <form id="uform">
+        <label>Resume (PDF — optional)</label>
+        <input type="file" id="resume" name="resume" accept="application/pdf" />
+        <div id="resumeChip" class="filechips" aria-live="polite"></div>
+
+        <label style="margin-top:12px">Papers (PDFs — optional)</label>
+        <input type="file" id="papers" name="papers" accept="application/pdf" multiple />
+        <div id="papersChips" class="filechips" aria-live="polite"></div>
+
+        <!-- UPDATED: free-text used to summarize goals/interests -->
+        <label style="margin-top:12px">Goals & Interests (optional)</label>
+        <textarea id="about" name="about" placeholder="What roles/industries/locations? Remote/hybrid? Company size? Domains you care about? Any constraints (visa, timezone, salary hints)."></textarea>
+
+        <!-- NEW: explicit preference inputs -->
+        <div style="display:grid;gap:12px;margin-top:12px">
+          <div>
+            <label>Preferred locations (comma-separated)</label>
+            <input type="text" id="pref_locations" name="pref_locations" placeholder="e.g., Remote, New York, Bay Area" />
+          </div>
+
+          <div>
+            <label>Preferred work mode (choose any)</label>
+            <div class="small muted">If you pick none, we’ll infer from your text or resume/papers.</div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+              <label class="small"><input type="checkbox" name="pref_work_modes" value="remote"> Remote</label>
+              <label class="small"><input type="checkbox" name="pref_work_modes" value="hybrid"> Hybrid</label>
+              <label class="small"><input type="checkbox" name="pref_work_modes" value="onsite"> Onsite</label>
+            </div>
+          </div>
         </div>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
+          <button class="btn" id="submitBtn">Process</button>
+          <span id="status" class="muted small"></span>
+        </div>
+      </form>
     </div>
 
-    <script src="script.js"></script>
+    <div id="results" class="grid" style="margin-top:16px;display:none">
+      <div class="panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h2 style="margin:0 0 8px">Artifacts</h2>
+          <span id="srcCounts" class="small muted"></span>
+        </div>
+        <div id="artifacts" class="grid grid-3"></div>
+      </div>
+
+      <!-- Preferences summary -->
+      <div class="panel" id="prefsPanel" style="display:none">
+        <h2 style="margin:0 0 8px">Preferences</h2>
+        <div id="prefsSummary" class="small"></div>
+        <div id="prefsChips" class="filechips" style="margin-top:8px"></div>
+      </div>
+
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Skills (with proof)</h2>
+        <div id="skills" class="grid grid-3"></div>
+      </div>
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Projects</h2>
+        <div id="projects" class="grid grid-3"></div>
+      </div>
+
+      <div class="panel" id="jobsPanel" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h2 style="margin:0">Recommended Jobs</h2>
+          <span id="jobsMeta" class="small muted"></span>
+        </div>
+        <div id="jobs" class="grid grid-3" style="margin-top:8px"></div>
+        <div id="jobsEmpty" class="small muted" style="margin-top:8px;display:none">No matches yet.</div>
+      </div>
+      <!-- Raw JSON section removed -->
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const API = 'http://localhost:3000';
+
+    const form = document.getElementById('uform');
+    const btn  = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('status');
+    const results = document.getElementById('results');
+
+    const resumeInput = document.getElementById('resume');
+    const papersInput = document.getElementById('papers');
+    const resumeChip  = document.getElementById('resumeChip');
+    const papersChips = document.getElementById('papersChips');
+
+    const srcCounts   = document.getElementById('srcCounts');
+    const prefsPanel  = document.getElementById('prefsPanel');
+    const prefsSummary= document.getElementById('prefsSummary');
+    const prefsChips  = document.getElementById('prefsChips');
+
+    const jobsPanel = document.getElementById('jobsPanel');
+    const jobsMeta  = document.getElementById('jobsMeta');
+    const jobsBox   = document.getElementById('jobs');
+    const jobsEmpty = document.getElementById('jobsEmpty');
+
+    const prefLocationsInput = document.getElementById('pref_locations');
+
+    function escapeHtml(s){
+      return (s||'').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+
+    // Sanitize and normalize URLs for "Apply" links
+    function safeUrl(u){
+      try{
+        let url = String(u||'').trim();
+        if (!url) return '';
+        const low = url.toLowerCase();
+        if (low.startsWith('javascript:')) return '';
+        if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+        return url;
+      }catch{ return ''; }
+    }
+
+    // Short summary from description/company/title
+    function summarizeJob(j, max=220){
+      const desc = String(j.description||'').trim();
+      const base = desc || `${j.title ? j.title : 'Role'} at ${j.company || 'Company'}${j.location ? ' — ' + j.location : ''}`;
+      if (base.length <= max) return base;
+      const cut = base.slice(0, max);
+      const end = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '));
+      const pick = end > 80 ? cut.slice(0, end+1) : cut;
+      return pick.trim() + '…';
+    }
+
+    function chip(text){
+      const span = document.createElement('span');
+      span.className = 'chip';
+      span.textContent = text;
+      return span;
+    }
+
+    resumeInput.addEventListener('change', (e) => {
+      resumeChip.innerHTML = '';
+      const f = e.target.files && e.target.files[0];
+      if (f) resumeChip.appendChild(chip(`Resume: ${f.name}`));
+      statusEl.textContent = f ? `Selected: ${f.name}` : '';
+    });
+
+    papersInput.addEventListener('change', (e) => {
+      papersChips.innerHTML = '';
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      files.slice(0,5).forEach(f => papersChips.appendChild(chip(f.name)));
+      if (files.length > 5) papersChips.appendChild(chip(`+${files.length-5} more`));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      results.style.display = 'none';
+      jobsPanel.style.display = 'none';
+      prefsPanel.style.display = 'none';
+
+      try {
+        const fd = new FormData();
+
+        const resume = resumeInput.files[0] || null;
+        const papers = papersInput.files || [];
+
+        if (!resume && papers.length === 0) {
+          throw new Error('Please add a resume or at least one paper PDF.');
+        }
+
+        if (resume) fd.append('resume', resume);
+        for (const p of papers) fd.append('papers', p);
+
+        // Free-text field
+        fd.append('about', document.getElementById('about').value || '');
+
+        // Explicit preferences
+        const locs = prefLocationsInput.value || '';
+        if (locs.trim()) fd.append('pref_locations', locs);
+
+        const modeChecks = document.querySelectorAll('input[name="pref_work_modes"]:checked');
+        modeChecks.forEach(cb => fd.append('pref_work_modes', cb.value));
+
+        const nSources = (resume ? 1 : 0) + papers.length;
+        statusEl.textContent = `Uploading ${nSources} source${nSources===1?'':'s'}…`;
+
+        const r = await fetch(API + '/process', { method:'POST', body: fd });
+        const text = await r.text();
+        let data;
+        try { data = JSON.parse(text); } catch { throw new Error(text || 'Invalid JSON'); }
+
+        renderArtifacts(data.artifacts || []);
+        renderPreferences(data.profile || {});
+        renderSkills(data.skills || []);
+        renderProjects(data.projects || []);
+
+        results.style.display = '';
+
+        const savedLink = API + '/outputs/latest.json';
+        const firstTitle = (data.artifacts && data.artifacts[0] && (data.artifacts[0].title || data.artifacts[0].id)) || (resume ? 'resume.pdf' : 'papers');
+        const rCount = (data.counts && data.counts.resume) ? data.counts.resume : (resume ? 1 : 0);
+        const pCount = (data.counts && typeof data.counts.papers === 'number') ? data.counts.papers : papers.length || 0;
+        const noteParts = [];
+        if (rCount) noteParts.push(`${rCount} resume`);
+        if (pCount) noteParts.push(`${pCount} paper${pCount===1?'':'s'}`);
+        const note = noteParts.length ? ` (${noteParts.join(' + ')})` : '';
+        statusEl.innerHTML = `Processed: <b>${escapeHtml(firstTitle)}</b>${note} — saved to <a class="link" href="${savedLink}" target="_blank">outputs/latest.json</a>`;
+
+        srcCounts.textContent = `${rCount} resume • ${pCount} paper${pCount===1?'':'s'}`;
+
+        await loadJobRecommendations('all');
+
+      } catch (err) {
+        statusEl.textContent = 'Error: ' + (err.message || err);
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    async function loadJobRecommendations(limit = 'all'){
+      try {
+        jobsMeta.textContent = 'Finding matches…';
+        jobsBox.innerHTML = '';
+        jobsEmpty.style.display = 'none';
+        jobsPanel.style.display = '';
+
+        const qs = (limit === 'all') ? 'limit=all' : `limit=${encodeURIComponent(limit)}`;
+        const r = await fetch(`${API}/jobs/recommend?${qs}`);
+        const rec = await r.json();
+
+        const matches = rec && rec.matches ? rec.matches : [];
+        jobsMeta.textContent = `${matches.length} shown • jobs loaded: ${rec.total_jobs ?? '—'}`;
+
+        if (!matches.length){
+          jobsEmpty.style.display = '';
+          return;
+        }
+        renderJobs(matches);
+      } catch (e) {
+        jobsMeta.textContent = 'Error loading matches';
+        console.error(e);
+      }
+    }
+
+    function renderJobs(items){
+      jobsBox.innerHTML = '';
+      for (const j of items){
+        const div = document.createElement('div');
+        div.className = 'card';
+        const kws = Array.isArray(j.keywords) ? j.keywords.slice(0,8) : [];
+        const pref = (j.scores && j.scores.preference) || 0;
+        const skill= (j.scores && j.scores.skill) || 0;
+
+        // Summary + APPLY (prioritize job_url_direct)
+        const summary = summarizeJob(j, 220);
+        const rawApply = j.job_url_direct || j.apply_url || j.url || j.link || j.applyLink || '';
+        const applyHref = safeUrl(rawApply);
+
+        div.innerHTML = `
+          <div class="job-head">
+            <div>
+              <div><b>${escapeHtml(j.title || 'Role')}</b></div>
+              <div class="small muted" style="margin-top:4px">${escapeHtml(j.company || 'Company')} • ${escapeHtml(j.location || 'Location')}</div>
+            </div>
+            <div class="scoreWrap">
+              <span class="pill">preference ${pref}%</span>
+              <span class="pill">skill ${skill}%</span>
+            </div>
+          </div>
+
+          <div class="small clamp-3" style="margin-top:8px">${escapeHtml(summary)}</div>
+
+          ${j.reasons?.preference ? `<div class="small" style="margin-top:8px"><b>Why by preference:</b> ${escapeHtml(j.reasons.preference)}</div>` : ''}
+          ${j.reasons?.skill ? `<div class="small" style="margin-top:6px"><b>Why by skill:</b> ${escapeHtml(j.reasons.skill)}</div>` : ''}
+
+          <div class="job-actions">
+            ${kws.length ? `<div class="keywords">${kws.map(k=>`<span class="badge">${escapeHtml(String(k))}</span>`).join('')}</div>` : '<span></span>'}
+            ${applyHref ? `<a class="btn" href="${applyHref}" target="_blank" rel="noopener">Apply</a>` : ''}
+          </div>
+        `;
+        jobsBox.appendChild(div);
+      }
+    }
+
+    function renderArtifacts(items){
+      const box = document.getElementById('artifacts'); box.innerHTML = '';
+      for (const a of items){
+        const div = document.createElement('div');
+        div.className = 'card';
+        const id = a.id ? ` (${escapeHtml(a.id)})` : '';
+        const kind = a.id && a.id.startsWith('p') ? 'Paper' : (a.id==='a1' ? 'Resume' : 'Source');
+        div.innerHTML = `
+          <div><b>${escapeHtml(a.title || a.id)}</b><span class="small muted">${id}</span><span class="pill" style="margin-left:6px">${kind}</span></div>
+          <div class="small muted">${escapeHtml(a.type || '')}</div>
+          <div class="small" style="margin-top:6px">${escapeHtml((a.text_excerpt || '').slice(0,180))}…</div>
+        `;
+        box.appendChild(div);
+      }
+    }
+
+    function renderPreferences(profile){
+      const prefs = (profile && profile.preferences) || {};
+      const hasAnything =
+        (prefs.summary && prefs.summary.trim()) ||
+        (Array.isArray(prefs.goals) && prefs.goals.length) ||
+        (Array.isArray(prefs.interests) && prefs.interests.length) ||
+        (Array.isArray(prefs.industries) && prefs.industries.length) ||
+        (Array.isArray(prefs.role_types) && prefs.role_types.length) ||
+        (Array.isArray(prefs.locations) && prefs.locations.length) ||
+        (Array.isArray(prefs.work_modes) && prefs.work_modes.length) ||
+        (Array.isArray(prefs.company_size) && prefs.company_size.length) ||
+        (Array.isArray(prefs.constraints) && prefs.constraints.length);
+      if (!hasAnything) { prefsPanel.style.display = 'none'; return; }
+
+      prefsPanel.style.display = '';
+      prefsSummary.textContent = prefs.summary || '—';
+
+      const makeChips = (label, arr=[]) => {
+        if (!arr.length) return;
+        const row = document.createElement('div');
+        row.className = 'small';
+        row.style.marginTop = '8px';
+        row.innerHTML = `<b>${label}:</b> `;
+        const wrap = document.createElement('span');
+        wrap.className = 'filechips';
+        arr.slice(0,12).forEach(v => wrap.appendChild(chip(String(v))));
+        row.appendChild(wrap);
+        prefsChips.appendChild(row);
+      };
+
+      prefsChips.innerHTML = '';
+      makeChips('Locations', prefs.locations || []);
+      makeChips('Work Modes', prefs.work_modes || []);
+      makeChips('Goals', prefs.goals || []);
+      makeChips('Interests', prefs.interests || []);
+      makeChips('Industries', prefs.industries || []);
+      makeChips('Roles', prefs.role_types || []);
+      makeChips('Company Size', prefs.company_size || []);
+      makeChips('Constraints', prefs.constraints || []);
+    }
+
+    function renderSkills(items){
+      const box = document.getElementById('skills'); box.innerHTML = '';
+      for (const s of items){
+        const div = document.createElement('div');
+        const ev = (s.evidence && s.evidence[0]) || null;
+        const fromPaper = ev && String(ev.artifact_id||'').startsWith('p');
+        div.className = 'card';
+        div.innerHTML = `
+          <div>
+            <b>${escapeHtml(s.name)}</b>
+            <span class="badge">${escapeHtml(s.level || '')}</span>
+            ${fromPaper ? '<span class="pill" style="margin-left:6px">from paper</span>' : ''}
+          </div>
+          ${ev ? `<div class="small muted" style="margin-top:6px">Proof (${escapeHtml(ev.artifact_id)}): “${escapeHtml((ev.snippet||'').slice(0,160))}”</div>` : ''}
+        `;
+        box.appendChild(div);
+      }
+    }
+
+    function renderProjects(items){
+      const box = document.getElementById('projects'); box.innerHTML = '';
+      for (const p of items){
+        const div = document.createElement('div');
+        div.className = 'card';
+        const ev = (p.evidence && p.evidence[0]) || null;
+        const tagsMethods = Array.isArray(p.methods) ? p.methods.slice(0,6) : [];
+        const tagsTech = Array.isArray(p.tech_stack) ? p.tech_stack.slice(0,6) : [];
+        const hdrRight = [p.venue, p.year].filter(Boolean).join(' • ');
+        div.innerHTML = `
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline">
+            <div><b>${escapeHtml(p.title || 'Project')}</b> ${p.role ? `<span class="pill" style="margin-left:6px">${escapeHtml(p.role)}</span>` : ''}</div>
+            <div class="small muted">${escapeHtml(hdrRight)}</div>
+          </div>
+          <div class="small" style="margin-top:6px">${escapeHtml(p.summary || '')}</div>
+          ${tagsMethods.length ? `<div class="keywords" style="margin-top:6px">${tagsMethods.map(m=>`<span class="badge">${escapeHtml(String(m))}</span>`).join('')}</div>` : ''}
+          ${tagsTech.length ? `<div class="keywords" style="margin-top:6px">${tagsTech.map(t=>`<span class="badge">${escapeHtml(String(t))}</span>`).join('')}</div>` : ''}
+          ${ev ? `<div class="small muted" style="margin-top:6px">Evidence (${escapeHtml(ev.artifact_id)}): “${escapeHtml((ev.snippet||'').slice(0,160))}”</div>` : ''}
+        `;
+        box.appendChild(div);
+      }
+    }
+  </script>
 </body>
 </html>
