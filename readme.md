@@ -52,6 +52,7 @@ We built both a **frontend** and **backend** to [describe what user sees / what 
 2. **Backend setup**
     - Navigate to backend/
     - Install dependencies:
+    ```bash
     # Example
     npm install
     # or
