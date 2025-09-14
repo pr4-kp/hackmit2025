@@ -1,0 +1,129 @@
+[
+  {
+    "id": "job_app_001",
+    "title": "NLP Research Engineer (Assessment Scoring)",
+    "company": "PrismLearn",
+    "location": "Remote",
+    "keywords": ["nlp", "pytorch", "transformers", "distilbert", "text-classification", "bias-checks", "human-in-the-loop", "fastapi", "evaluation", "huggingface", "spacy", "sklearn"],
+    "description": "Own short-answer scoring models with human-in-the-loop review and bias audits; ship FastAPI microservices and evaluation dashboards.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_002",
+    "title": "Scientific Software Engineer (Computational Physics)",
+    "company": "QuarkSim",
+    "location": "Cambridge, MA",
+    "keywords": ["monte carlo", "langevin dynamics", "python", "c++", "numerical methods", "vectorization", "job scheduling", "materials simulation", "numpy", "scipy"],
+    "description": "Build and optimize Monte Carlo/Langevin simulators for materials; accelerate parameter sweeps and document results for interdisciplinary users.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_003",
+    "title": "Visualization Engineer (WebGPU/WebAssembly)",
+    "company": "Photon Labs",
+    "location": "Boston, MA",
+    "keywords": ["webgpu", "webassembly", "wasm", "rust", "p5.js", "browser visualization", "education", "interactive tools"],
+    "description": "Create interactive physics & data visualizations in the browser using Rust→WASM and WebGPU; build teacher-facing widgets and docs.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_004",
+    "title": "Research Engineer, Interpretable NLP",
+    "company": "VerseAI",
+    "location": "Remote",
+    "keywords": ["interpretable ml", "crf", "sequence labeling", "bilstm-crf", "prosody", "meter", "nlp evaluation", "explainability", "nltk", "spacy"],
+    "description": "Develop interpretable sequence models (e.g., CRF/BiLSTM-CRF) for poetic meter & stylistic signals; ship clear error/explanation views.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_005",
+    "title": "Backend Engineer (Python/FastAPI)",
+    "company": "DocuSense",
+    "location": "Remote",
+    "keywords": ["python", "fastapi", "docker", "sql", "aws", "gcp", "microservices", "testing"],
+    "description": "Design and maintain FastAPI services powering NLP pipelines; write developer-friendly errors and documentation.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_006",
+    "title": "EdTech Data Scientist (NLP)",
+    "company": "Classroom Insight",
+    "location": "Boston, MA",
+    "keywords": ["edtech", "nlp", "transformers", "model evaluation", "bias auditing", "human-in-the-loop", "dashboards", "pandas", "sklearn"],
+    "description": "Build and evaluate models that grade student responses; design evaluation/bias checks and communicate results to educators.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_007",
+    "title": "Scientific Computing Advocate / Technical Writer",
+    "company": "OpenCompute Foundation",
+    "location": "Remote",
+    "keywords": ["technical writing", "documentation", "tutorials", "streamlit", "public speaking", "python", "scientific computing"],
+    "description": "Author tutorials and sample apps for scientific Python users; present talks and craft plain-language guides for non-experts.",
+    "applicability": "applicable"
+  },
+  {
+    "id": "job_app_008",
+    "title": "Research Engineer, Physics-Inspired ML",
+    "company": "Lattice AI",
+    "location": "Cambridge, MA",
+    "keywords": ["physics-informed", "simulation", "numpy", "jax", "pde intuition", "ml", "python", "visualization"],
+    "description": "Prototype physics-informed ML models and tooling; collaborate with researchers to visualize and explain model behavior.",
+    "applicability": "applicable"
+  },
+
+  {
+    "id": "job_rand_001",
+    "title": "Orthopedic Surgeon",
+    "company": "City Hospital",
+    "location": "Boston, MA",
+    "keywords": ["md", "residency", "board certified", "orthopedic surgery", "operating room", "patient care"],
+    "description": "Perform surgical procedures and manage postoperative care; requires medical degree, residency, and board certification.",
+    "applicability": "unapplicable"
+  },
+  {
+    "id": "job_rand_002",
+    "title": "Senior Tax Accountant",
+    "company": "Ledger & Co.",
+    "location": "Remote",
+    "keywords": ["cpa", "gaap", "ifrs", "tax filings", "audit", "quickbooks"],
+    "description": "Own corporate tax compliance and audits; CPA with deep GAAP/IFRS expertise required.",
+    "applicability": "unapplicable"
+  },
+  {
+    "id": "job_rand_003",
+    "title": "Commercial Airline Pilot",
+    "company": "SkyWays",
+    "location": "NYC",
+    "keywords": ["faa atp", "multi-engine", "ifr", "type rating", "flight hours"],
+    "description": "Operate commercial aircraft on domestic routes; requires FAA ATP, type ratings, and logged flight hours.",
+    "applicability": "unapplicable"
+  },
+  {
+    "id": "job_rand_004",
+    "title": "Pediatric Nurse (RN)",
+    "company": "Greenfield Pediatrics",
+    "location": "Cambridge, MA",
+    "keywords": ["rn", "pediatric care", "ehr", "triage", "medication administration"],
+    "description": "Provide nursing care to pediatric patients; active RN license and clinical experience required.",
+    "applicability": "unapplicable"
+  },
+  {
+    "id": "job_rand_005",
+    "title": "Real Estate Agent",
+    "company": "Metro Realty",
+    "location": "Boston, MA",
+    "keywords": ["broker license", "mls", "escrow", "closings", "property showings"],
+    "description": "Represent buyers/sellers in residential transactions; requires state real-estate license and MLS experience.",
+    "applicability": "unapplicable"
+  },
+  {
+    "id": "job_rand_006",
+    "title": "Sous Chef (Fine Dining)",
+    "company": "Atelier 9",
+    "location": "New York, NY",
+    "keywords": ["culinary arts", "garde manger", "haccp", "menu development", "kitchen brigade"],
+    "description": "Lead dinner service and develop menus in a fine-dining kitchen; culinary certification preferred.",
+    "applicability": "unapplicable"
+  }
+]
