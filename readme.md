@@ -8,16 +8,15 @@
 - [Tech Stack](#tech-stack)  
 - [Setup & Installation](#setup--installation)  
 - [Usage](#usage)  
-- [Architecture](#architecture)  
-- [Contributing](#contributing)  
 - [License](#license)  
-- [Contact](#contact)  
 
 ---
 
+
 ## About
 
-**HackMIT 2025** is a project by the *pr4-kp* team aiming to [brief description of the core goal — e.g., “use AI/ML to do X”, “create an app that does Y”, “web platform for Z”, etc.].  
+**HackMIT 2025** is a project by the *GapLess* team aiming to create a living, verifiable skills profile that turns your real work (docs, links, repos) into a structured, evidence-backed portfolio, maps you to non-obvious roles, and generates tailored “apply” packets in one click.
+
 We built both a **frontend** and **backend** to [describe what user sees / what backend handles].  
 
 ---
@@ -36,10 +35,9 @@ We built both a **frontend** and **backend** to [describe what user sees / what 
 
 | Component    | Technology |
 |--------------|------------|
-| Frontend     | [e.g. React, Vue, HTML/CSS/JS] |
-| Backend      | [e.g. Node.js / Express, Python / Flask / Django] |
-| Database     | [e.g. PostgreSQL, MongoDB] |
-| Additional   | [e.g. Docker, cloud services, APIs] |
+| Frontend     | HTML/JS/CSS |
+| Backend      | Python Jupyter |
+| Additional   | Claude API |
 
 ---
 
@@ -57,6 +55,7 @@ We built both a **frontend** and **backend** to [describe what user sees / what 
     npm install
     # or
     pip install -r requirements.txt
+
     - Configure environment variables (e.g. DB connection strings, API keys)
     - Run migrations (if needed)
     - Start backend server
@@ -68,3 +67,12 @@ We built both a **frontend** and **backend** to [describe what user sees / what 
     - Any environment variables or config files needed
     - Ports / URLs used
     - How to run in development vs production
+## Usage
+
+Click on the url to access the website
+Upload your resume/paper or any other things that says about you
+Get your customized job recommendation
+
+## License
+
+[Specify license here, e.g. MIT License]
